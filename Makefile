@@ -2,7 +2,8 @@
 .PHONY: lint
 
 CXX := g++
-CXXFLAGS := -std=c++11 -I./include
+# CXX := clang++
+CXXFLAGS := -std=c++14 -I./include
 
 SRC_CTCL := $(shell find ./CtCI-6th-Edition-cpp -name "*.cpp")
 OBJ_CTCL := $(patsubst %.cpp, %.o, $(SRC_CTCL))

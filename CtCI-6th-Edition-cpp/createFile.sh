@@ -12,8 +12,8 @@ cat > $name.test.cpp <<EOF
 #include "catch.hpp"
 #include "$name.hpp"
 
-TEST_CASE("DESCRIPTION", "[$name]") {
-  REQUIRE($name(ARGS) == EXPECT);
+TEST_CASE("$name test", "[$name]") {
+  REQUIRE($name(INPUT) == EXPECT);
 }
 
 EOF

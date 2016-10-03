@@ -3,6 +3,6 @@
 
 #include <vector>
 
-void rotateMatrix(std::vector<std::vector<int>> m);
+void rotateMatrix(std::vector<std::vector<int>>& m);
 
 #endif
