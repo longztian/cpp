@@ -1,6 +1,6 @@
-#include "LinkedList.hpp"
+#include "LinkedListUnique.hpp"
 
-namespace LinkedList {
+namespace LinkedListUnique {
   Node::Node(int d) : data(d), next(nullptr) {}
 
   bool Node::operator ==(const Node& rhs) const {
@@ -9,7 +9,7 @@ namespace LinkedList {
     bool isEqual = data == rhs.data;
 
     if (isEqual) {
-      isEqual = LinkedList::equal(next, rhs.next);
+      isEqual = LinkedListUnique::equal(next, rhs.next);
     }
 
     return isEqual;
@@ -27,11 +27,11 @@ namespace LinkedList {
 
     for (auto i = il.begin(); i != il.end(); ++i) {
       if (node) {
-        node->next = std::make_unique<LinkedList::Node>(*i);
+        node->next = std::make_unique<LinkedListUnique::Node>(*i);
         node = node->next.get();
       }
       else {
-        head = std::make_unique<LinkedList::Node>(*i);
+        head = std::make_unique<LinkedListUnique::Node>(*i);
         node = head.get();
       }
     }

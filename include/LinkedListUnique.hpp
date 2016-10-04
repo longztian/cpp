@@ -1,16 +1,16 @@
-#ifndef LINKEDLIST_HPP
-#define LINKEDLIST_HPP
+#ifndef LINKEDLISTUNIQUE_HPP
+#define LINKEDLISTUNIQUE_HPP
 
 #include <initializer_list>
 #include <vector>
 #include <memory>
 
-namespace LinkedList {
+namespace LinkedListUnique {
   class Node;
 }
-using p_node_t = std::unique_ptr<LinkedList::Node>;
+using p_node_t = std::unique_ptr<LinkedListUnique::Node>;
 
-namespace LinkedList {
+namespace LinkedListUnique {
   class Node {
   public:
     int data;

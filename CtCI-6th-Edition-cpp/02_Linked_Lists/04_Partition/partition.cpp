@@ -3,8 +3,8 @@
 void partition(p_node_t& head, int x) {
   if (head == nullptr || head->next == nullptr) return;
 
-  p_node_t lHead = std::make_unique<LinkedList::Node>(0);
-  p_node_t rHead = std::make_unique<LinkedList::Node>(0);
+  p_node_t lHead = std::make_unique<LL::Node>(0);
+  p_node_t rHead = std::make_unique<LL::Node>(0);
   auto lTail = lHead.get();
   auto rTail = rHead.get();
 

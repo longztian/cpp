@@ -4,7 +4,7 @@
 void reverseList(p_node_t& head) {
   if (head == nullptr) return;
 
-  auto dummy = LinkedList::create({0});
+  auto dummy = LL::create({0});
 
   auto p = head.release(), pNext = p;
   while (p) {

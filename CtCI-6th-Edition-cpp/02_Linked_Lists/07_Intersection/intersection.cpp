@@ -1,28 +1,40 @@
 #include <vector>
 #include "intersection.hpp"
 
-std::vector<const Node*> listToVector(const Node* head) {
-  std::vector<const Node*> nodes;
-  while (head) {
-    nodes.push_back(head);
-    head = head->next;
-  }
-
-  return nodes;
-}
-
-Node* intersection(const Node* head1, const Node* head2) {
+p_node_t intersection(p_node_t head1, p_node_t head2) {
   if (head1 == nullptr || head2 == nullptr) return nullptr;
+  if (head1 == head2) return head1;
 
-  auto nodes1 = listToVector(head1);
-  auto nodes2 = listToVector(head2);
-
-  auto p1 = nodes1.crbegin(), p2 = nodes2.crbegin(), p1e = nodes1.crend(), p2e = nodes2.crend();
-  while (p1 != p1e && p2 != p2e) {
-    if (p1 != p2) break;
-    p1 += 1;
-    p2 += 1;
+  // check if has intersection
+  auto p1 = head1, p2 = head2;
+  auto n1 = 0, n2 = 0;
+  while (p1->next) {
+    p1 = p1->next;
+    n1 += 1;
+  }
+  while (p2->next) {
+    p2 = p2->next;
+    n2 += 1;
   }
 
-  return p1 == nodes1.crbegin() ? nullptr : (Node*) (*p1);
+  if (p1 != p2) return nullptr;
+
+  // find intersection node
+  p1 = head1;
+  p2 = head2;
+  while (n1 > n2) {
+    p1 = p1->next;
+    n1 -= 1;
+  }
+  while (n1 < n2) {
+    p2 = p2->next;
+    n2 -= 1;
+  }
+
+  while (p1 != p2) {
+    p1 = p1->next;
+    p2 = p2->next;
+  }
+
+  return p1;
 }

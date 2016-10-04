@@ -1,7 +1,7 @@
 #include <unordered_set>
 #include "removeDups.hpp"
 
-bool exist(const LinkedList::Node* begin, const LinkedList::Node* end, int v) {
+bool exist(const LL::Node* begin, const LL::Node* end, int v) {
   for (auto p = begin; p != end; p = p->next.get()) {
     if (p->data == v) return true;
   }

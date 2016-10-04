@@ -1,11 +1,10 @@
 #ifndef INTERSECTION_HPP
 #define INTERSECTION_HPP
 
-struct Node {
-  int data;
-  Node* next;
-};
+#include "LinkedListShared.hpp"
 
-Node* intersection(const Node* head1, const Node* head2);
+namespace LL = LinkedListShared;
+
+p_node_t intersection(p_node_t head1, p_node_t head2);
 
 #endif

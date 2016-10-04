@@ -4,7 +4,7 @@ p_node_t sumLists(const p_node_t& l1, const p_node_t& l2) {
   if (l1 == nullptr && l2 == nullptr) return p_node_t(nullptr);
 
   // create result linked list with a dummy head node
-  p_node_t sum = std::make_unique<LinkedList::Node>(0);
+  p_node_t sum = std::make_unique<LL::Node>(0);
   auto p = sum.get();
 
   // sum
@@ -24,7 +24,7 @@ p_node_t sumLists(const p_node_t& l1, const p_node_t& l2) {
       p1 = p1->next.get();
       p2 = p2->next.get();
     }
-    p->next = std::make_unique<LinkedList::Node>(v);
+    p->next = std::make_unique<LL::Node>(v);
     p = p->next.get();
   }
 
@@ -37,7 +37,7 @@ p_node_t sumLists(const p_node_t& l1, const p_node_t& l2) {
   }
   // last element
   if (p->data > 9) {
-    p->next = std::make_unique<LinkedList::Node>(p->data / 10);
+    p->next = std::make_unique<LL::Node>(p->data / 10);
     p->data %= 10;
   }
 

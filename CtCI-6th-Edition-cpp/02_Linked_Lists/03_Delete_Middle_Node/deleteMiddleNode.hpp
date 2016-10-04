@@ -1,7 +1,9 @@
 #ifndef DELETEMIDDLENODE_HPP
 #define DELETEMIDDLENODE_HPP
 
-#include "LinkedList.hpp"
+#include "LinkedListUnique.hpp"
+
+namespace LL = LinkedListUnique;
 
 void deleteMiddleNode(p_node_t& node);
 
