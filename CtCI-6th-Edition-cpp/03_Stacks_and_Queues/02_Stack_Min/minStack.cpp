@@ -1,3 +1,4 @@
+#include <algorithm>
 #include "minStack.hpp"
 
 void MinStack::push(int v) {
