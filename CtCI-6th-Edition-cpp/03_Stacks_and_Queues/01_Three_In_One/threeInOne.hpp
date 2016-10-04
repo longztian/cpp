@@ -3,9 +3,9 @@
 
 #include <memory>
 
-class MyStack {
+class ThreeInOneStack {
 public:
-  MyStack(int* buffer, int size);
+  ThreeInOneStack(int* buffer, int size);
   void push(int v);
   int pop();
   int peek();
@@ -17,7 +17,7 @@ private:
   int* myTop;
 };
 
-using p_stack_t = std::shared_ptr<MyStack>;
+using p_stack_t = std::shared_ptr<ThreeInOneStack>;
 
 void threeInOne(p_stack_t& s1, p_stack_t& s2, p_stack_t& s3);
 
