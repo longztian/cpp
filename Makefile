@@ -1,28 +1,47 @@
 .DEFAULT_GOAL := build
 .PHONY: lint
 
+SHELL := /bin/bash
+
+# locate the include folder
+INCLUDE := $(shell INC=./include; while [[ ! -d $$INC ]] && [[ $$(realpath $$INC) != "/include" ]]; do INC=../$$INC; done; realpath -e $$INC 2>/dev/null)
+ifeq ($(INCLUDE),"")
+$(error No include path found!)
+endif
+
 CXX := g++
 #CXX := clang++
-CXXFLAGS := -g -std=c++14 -I./include
+CXXFLAGS := -g -fPIC -std=c++14 -I$(INCLUDE)
 
-INCLUDE  := $(shell find ./include -name "*.hpp")
-HPP_CTCL := $(shell find ./CtCI-6th-Edition-cpp -name "*.hpp")
-SRC_CTCL := $(shell find ./CtCI-6th-Edition-cpp -name "*.cpp")
-OBJ_CTCL := $(patsubst %.cpp, %.o, $(SRC_CTCL))
-EXE_CTCL := $(patsubst %.cpp, %, $(filter %/test.cpp, $(SRC_CTCL)))
-#$(info $(EXE_CTCL))
+SRC := $(shell find . -name "*.cpp")
+OBJ := $(patsubst %.cpp, %.o, $(SRC))
 
-CXX=g++
+DEP := .dep
+$(shell mkdir -p $(DEP) >/dev/null)
+# pull in dependency info for *existing* .o files
+-include $(addprefix $(DEP)/,$(notdir $(SRC:.o=.d)))
+
+# compile and generate dependency info
+%.o: %.cpp
+	$(CXX) -c  $(CXXFLAGS) -o $*.o $*.cpp
+	$(CXX) -MM $(CXXFLAGS) $*.cpp > $(addprefix $(DEP)/,$(notdir $*.d))
 
 lint:
-	cpplint --quiet --filter=-legal/copyright ${SRC_CTCL} && \
+	cpplint --quiet --filter=-legal/copyright ${SRC} && \
 	cppcheck --quiet --enable=warning,style,performance,portability,unusedFunction --std=c++11 .
 
-build: $(OBJ_CTCL) $(HPP_CTCL) $(INCLUDE)
-	$(CXX) $(CXXFLAGS) $(LDFLAGS) -o $(EXE_CTCL) $(OBJ_CTCL)
+TEST := /tmp/test
+$(TEST):
+	@echo '#define CATCH_CONFIG_MAIN' > $(TEST).cpp
+	@echo '#include "catch.hpp"' >> $(TEST).cpp
+	@$(MAKE) $(TEST).o
+
+build: $(OBJ) $(TEST)
+#	$(CXX) -shared $(CXXFLAGS) $(LDFLAGS) -o libTest.so $(OBJ)
+	$(CXX) $(CXXFLAGS) $(LDFLAGS) -o $(TEST) $(OBJ) $(TEST).o
 
 test:
-	$(EXE_CTCL)
+	$(TEST)
 
 clean:
-	rm -rf $(OBJ_CTCL) $(EXE_CTCL)
+	rm -rf $(TEST) $(OBJ) $(DEP) $(TEST).*
