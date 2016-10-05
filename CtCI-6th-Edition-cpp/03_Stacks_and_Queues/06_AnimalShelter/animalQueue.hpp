@@ -1,0 +1,30 @@
+#ifndef ANIMALQUEUE_HPP
+#define ANIMALQUEUE_HPP
+
+#include <list>
+#include <memory>
+
+enum AnimalType {
+  DOG,
+  CAT
+};
+
+struct Animal {
+  AnimalType type;
+  int data;
+};
+
+using p_animal_t = std::unique_ptr<Animal>;
+
+class AnimalQueue {
+public:
+  void enqueue(Animal&& a);
+  p_animal_t dequeue();
+  p_animal_t dequeue(AnimalType);
+  bool empty() const noexcept;
+
+private:
+  std::list<Animal> myList;
+};
+
+#endif
