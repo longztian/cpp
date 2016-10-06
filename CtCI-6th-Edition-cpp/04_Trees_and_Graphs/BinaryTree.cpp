@@ -32,13 +32,8 @@ namespace BinaryTree {
         // branch terminitor
         if (stack.empty()) break;
 
-        if (p == nullptr) {
-          p = stack.back();
-          stack.pop_back();
-        }
-        else {
-          p = nullptr;
-        }
+        p = stack.back();
+        stack.pop_back();
       }
       else {
         // new node
