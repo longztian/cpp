@@ -34,7 +34,7 @@ TEST := /tmp/test
 $(TEST):
 	@echo '#define CATCH_CONFIG_MAIN' > $(TEST).cpp
 	@echo '#include "catch.hpp"' >> $(TEST).cpp
-	@$(MAKE) $(TEST).o
+	$(CXX) -c $(CXXFLAGS) -o $(TEST).o $(TEST).cpp
 
 build: $(OBJ) $(TEST)
 #	$(CXX) -shared $(CXXFLAGS) $(LDFLAGS) -o libTest.so $(OBJ)
