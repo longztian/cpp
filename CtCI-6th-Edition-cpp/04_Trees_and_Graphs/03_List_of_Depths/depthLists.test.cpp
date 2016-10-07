@@ -1,7 +1,7 @@
 #include "catch.hpp"
 #include "depthLists.hpp"
 
-namespace BT = BinaryTree;
+namespace BT = BinaryTreeUnique;
 
 TEST_CASE("depthLists test", "[depthLists]") {
   auto p = BT::create("[]");

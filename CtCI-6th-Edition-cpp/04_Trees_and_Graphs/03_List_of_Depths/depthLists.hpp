@@ -3,7 +3,7 @@
 
 #include <vector>
 #include <list>
-#include "BinaryTree.hpp"
+#include "BinaryTreeUnique.hpp"
 
 using list_vector_t = std::vector<std::list<int>>;
 list_vector_t depthLists(const p_node_t& tree);

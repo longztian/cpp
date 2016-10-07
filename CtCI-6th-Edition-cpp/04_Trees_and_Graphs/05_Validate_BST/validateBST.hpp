@@ -1,7 +1,7 @@
 #ifndef VALIDATEBST_HPP
 #define VALIDATEBST_HPP
 
-#include "BinaryTree.hpp"
+#include "BinaryTreeUnique.hpp"
 
 bool validateBST(const p_node_t& root);
 

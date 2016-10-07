@@ -3,10 +3,10 @@
 p_node_t createMinimalTree(const int* begin, const int* end) {
   int n = end - begin;
   if (n <= 0) return nullptr;
-  if (n == 1) return std::make_unique<BinaryTreeNode>(*begin);
+  if (n == 1) return std::make_unique<BinaryTreeUniqueNode>(*begin);
 
   auto middle = begin + n / 2;
-  auto p = std::make_unique<BinaryTreeNode>(*middle);
+  auto p = std::make_unique<BinaryTreeUniqueNode>(*middle);
   p->left = createMinimalTree(begin, middle);
   p->right = createMinimalTree(middle+1, end);
 

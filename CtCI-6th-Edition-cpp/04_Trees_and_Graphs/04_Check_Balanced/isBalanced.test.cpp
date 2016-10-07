@@ -1,7 +1,7 @@
 #include "catch.hpp"
 #include "isBalanced.hpp"
 
-namespace BT = BinaryTree;
+namespace BT = BinaryTreeUnique;
 
 TEST_CASE("isBalanced test", "[isBalanced]") {
   auto tree = BT::create("[]");

@@ -1,7 +1,7 @@
 #include "catch.hpp"
 #include "validateBST.hpp"
 
-namespace BT = BinaryTree;
+namespace BT = BinaryTreeUnique;
 
 TEST_CASE("validateBST test", "[validateBST]") {
   REQUIRE(validateBST(BT::create("[]")) == true);

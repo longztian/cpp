@@ -1,9 +1,9 @@
 #include "catch.hpp"
-#include "BinaryTree.hpp"
+#include "BinaryTreeUnique.hpp"
 
-namespace BT = BinaryTree;
+namespace BT = BinaryTreeUnique;
 
-TEST_CASE("create and toString, tailing 'null's are optional", "[BinaryTree]") {
+TEST_CASE("BinaryTreeUnique: create and toString, tailing 'null's are optional", "[BinaryTreeUnique]") {
   auto p = BT::create("[]");
   REQUIRE(p == nullptr);
 
@@ -36,7 +36,7 @@ TEST_CASE("create and toString, tailing 'null's are optional", "[BinaryTree]") {
 }
 
 
-TEST_CASE("equal", "[BinaryTree]") {
+TEST_CASE("BinaryTreeUnique: equal", "[BinaryTreeUnique]") {
   REQUIRE(BT::equal(BT::create("[1]"), BT::create("[]")) == false);
   REQUIRE(BT::equal(BT::create("[1]"), BT::create("[2]")) == false);
   REQUIRE(BT::equal(BT::create("[1]"), BT::create("[1]")) == true);

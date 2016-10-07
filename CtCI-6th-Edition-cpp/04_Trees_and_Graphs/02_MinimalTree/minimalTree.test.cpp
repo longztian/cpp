@@ -1,7 +1,7 @@
 #include "catch.hpp"
 #include "minimalTree.hpp"
 
-namespace BT = BinaryTree;
+namespace BT = BinaryTreeUnique;
 
 TEST_CASE("minimalTree test", "[minimalTree]") {
   std::vector<int> numbers;

@@ -1,7 +1,7 @@
 #ifndef ISBALANCED_HPP
 #define ISBALANCED_HPP
 
-#include "BinaryTree.hpp"
+#include "BinaryTreeUnique.hpp"
 
 bool isBalanced(const p_node_t& root);
 

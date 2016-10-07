@@ -3,7 +3,7 @@
 #include <unordered_map>
 #include "isBalanced.hpp"
 
-using node_height_map_t = std::unordered_map<const BinaryTreeNode*, int>;
+using node_height_map_t = std::unordered_map<const BinaryTreeUniqueNode*, int>;
 
 int getHeight(const p_node_t& root, node_height_map_t& cache) {
   if (root == nullptr) return 0;
