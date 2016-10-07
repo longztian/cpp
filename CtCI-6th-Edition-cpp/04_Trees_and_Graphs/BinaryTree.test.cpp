@@ -3,8 +3,14 @@
 
 namespace BT = BinaryTree;
 
-TEST_CASE("create and toString, tailing 'null's are optional", "[Tree]") {
-  auto p = BT::create("[1]");
+TEST_CASE("create and toString, tailing 'null's are optional", "[BinaryTree]") {
+  auto p = BT::create("[]");
+  REQUIRE(p == nullptr);
+
+  p = BT::create("[null]");
+  REQUIRE(p == nullptr);
+
+  p = BT::create("[1]");
   REQUIRE(p->data == 1);
   REQUIRE(p->left == nullptr);
   REQUIRE(p->right == nullptr);
@@ -27,4 +33,15 @@ TEST_CASE("create and toString, tailing 'null's are optional", "[Tree]") {
 
   p = BT::create("[1,2,null,3,null,null,4,5]");
   REQUIRE(BT::toString(p) == "[1,2,null,3,null,null,4,5,null,null,null]");
+}
+
+
+TEST_CASE("equal", "[BinaryTree]") {
+  REQUIRE(BT::equal(BT::create("[1]"), BT::create("[]")) == false);
+  REQUIRE(BT::equal(BT::create("[1]"), BT::create("[2]")) == false);
+  REQUIRE(BT::equal(BT::create("[1]"), BT::create("[1]")) == true);
+
+  auto p1 = BT::create("[1,2,null,3,null,null,4,5]");
+  auto p2 = BT::create("[1,2,null,3,null,null,4,5,null,null,null]");
+  REQUIRE(BT::equal(p1, p2) == true);
 }

@@ -15,7 +15,7 @@ void myToString(const p_node_t& root, std::string& tree) {
 
 namespace BinaryTree {
   p_node_t create(const std::string& tree) {
-    if (tree.size() < 2) return p_node_t(nullptr);
+    if (tree.size() < 3) return p_node_t(nullptr);
     if (tree.front() != '[' || tree.back() != ']') return p_node_t(nullptr);
 
     p_node_t root;
@@ -67,5 +67,14 @@ namespace BinaryTree {
     myToString(root, tree);
     tree.back() = ']';
     return tree;
+  }
+
+  bool equal(const p_node_t& t1, const p_node_t& t2) {
+    if (t1 == nullptr && t2 == nullptr) return true;
+    if (t1 == nullptr || t2 == nullptr) return false;
+
+    return t1->data == t2->data &&
+           equal(t1->left, t2->left) &&
+           equal(t1->right, t2->right);
   }
 }
