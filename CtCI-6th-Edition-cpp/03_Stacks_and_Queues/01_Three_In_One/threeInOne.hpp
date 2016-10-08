@@ -1,5 +1,5 @@
-#ifndef THREEINONE_HPP
-#define THREEINONE_HPP
+#ifndef CTCI_6TH_EDITION_CPP_03_STACKS_AND_QUEUES_01_THREE_IN_ONE_THREEINONE_HPP_
+#define CTCI_6TH_EDITION_CPP_03_STACKS_AND_QUEUES_01_THREE_IN_ONE_THREEINONE_HPP_
 
 #include <memory>
 
@@ -21,4 +21,4 @@ using p_stack_t = std::shared_ptr<ThreeInOneStack>;
 
 void threeInOne(p_stack_t& s1, p_stack_t& s2, p_stack_t& s3);
 
-#endif
+#endif  // CTCI_6TH_EDITION_CPP_03_STACKS_AND_QUEUES_01_THREE_IN_ONE_THREEINONE_HPP_

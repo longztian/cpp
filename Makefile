@@ -27,7 +27,7 @@ $(shell mkdir -p $(DEP) >/dev/null)
 	$(CXX) -MM $(CXXFLAGS) $*.cpp > $(addprefix $(DEP)/,$(notdir $*.d))
 
 lint:
-	cpplint --quiet --filter=-legal/copyright ${SRC} && \
+	cpplint --quiet --recursive . && \
 	cppcheck --quiet --enable=warning,style,performance,portability,unusedFunction --std=c++11 .
 
 TEST := /tmp/test

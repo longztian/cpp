@@ -1,9 +1,9 @@
-#ifndef MINIMALTREE_HPP
-#define MINIMALTREE_HPP
+#ifndef CTCI_6TH_EDITION_CPP_04_TREES_AND_GRAPHS_02_MINIMALTREE_MINIMALTREE_HPP_
+#define CTCI_6TH_EDITION_CPP_04_TREES_AND_GRAPHS_02_MINIMALTREE_MINIMALTREE_HPP_
 
 #include <vector>
 #include "BinaryTreeUnique.hpp"
 
 p_node_t minimalTree(const std::vector<int>& numbers);
 
-#endif
+#endif  // CTCI_6TH_EDITION_CPP_04_TREES_AND_GRAPHS_02_MINIMALTREE_MINIMALTREE_HPP_

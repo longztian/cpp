@@ -1,5 +1,5 @@
-#ifndef DOUBLEBINARYTREE_HPP
-#define DOUBLEBINARYTREE_HPP
+#ifndef INCLUDE_DOUBLEBINARYTREE_HPP_
+#define INCLUDE_DOUBLEBINARYTREE_HPP_
 
 #include <memory>
 #include <string>
@@ -23,4 +23,4 @@ namespace DoubleBinaryTree {
   bool equal(const p_node_t& t1, const p_node_t& t2);
 }
 
-#endif
+#endif  // INCLUDE_DOUBLEBINARYTREE_HPP_

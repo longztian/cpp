@@ -1,5 +1,5 @@
-#ifndef DETECTLOOP_HPP
-#define DETECTLOOP_HPP
+#ifndef CTCI_6TH_EDITION_CPP_02_LINKED_LISTS_08_LOOP_DETECTION_DETECTLOOP_HPP_
+#define CTCI_6TH_EDITION_CPP_02_LINKED_LISTS_08_LOOP_DETECTION_DETECTLOOP_HPP_
 
 #include "LinkedListShared.hpp"
 
@@ -7,4 +7,4 @@ namespace LL = LinkedListShared;
 
 p_node_t detectLoop(const p_node_t& head);
 
-#endif
+#endif  // CTCI_6TH_EDITION_CPP_02_LINKED_LISTS_08_LOOP_DETECTION_DETECTLOOP_HPP_

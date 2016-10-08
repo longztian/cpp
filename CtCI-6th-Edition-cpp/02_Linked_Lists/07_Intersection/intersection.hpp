@@ -1,5 +1,5 @@
-#ifndef INTERSECTION_HPP
-#define INTERSECTION_HPP
+#ifndef CTCI_6TH_EDITION_CPP_02_LINKED_LISTS_07_INTERSECTION_INTERSECTION_HPP_
+#define CTCI_6TH_EDITION_CPP_02_LINKED_LISTS_07_INTERSECTION_INTERSECTION_HPP_
 
 #include "LinkedListShared.hpp"
 
@@ -7,4 +7,4 @@ namespace LL = LinkedListShared;
 
 p_node_t intersection(p_node_t head1, p_node_t head2);
 
-#endif
+#endif  // CTCI_6TH_EDITION_CPP_02_LINKED_LISTS_07_INTERSECTION_INTERSECTION_HPP_

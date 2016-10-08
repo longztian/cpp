@@ -1,5 +1,5 @@
-#ifndef BINARYTREESHARED_HPP
-#define BINARYTREESHARED_HPP
+#ifndef INCLUDE_BINARYTREESHARED_HPP_
+#define INCLUDE_BINARYTREESHARED_HPP_
 
 #include <memory>
 #include <string>
@@ -22,4 +22,4 @@ namespace BinaryTreeShared {
   bool equal(const p_node_t& t1, const p_node_t& t2);
 }
 
-#endif
+#endif  // INCLUDE_BINARYTREESHARED_HPP_

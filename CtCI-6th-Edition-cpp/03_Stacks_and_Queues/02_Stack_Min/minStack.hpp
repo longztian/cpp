@@ -1,5 +1,5 @@
-#ifndef MINSTACK_HPP
-#define MINSTACK_HPP
+#ifndef CTCI_6TH_EDITION_CPP_03_STACKS_AND_QUEUES_02_STACK_MIN_MINSTACK_HPP_
+#define CTCI_6TH_EDITION_CPP_03_STACKS_AND_QUEUES_02_STACK_MIN_MINSTACK_HPP_
 
 #include <memory>
 #include <vector>
@@ -25,4 +25,4 @@ using p_stack_t = std::unique_ptr<MinStack>;
 
 MinStack minStack();
 
-#endif
+#endif  // CTCI_6TH_EDITION_CPP_03_STACKS_AND_QUEUES_02_STACK_MIN_MINSTACK_HPP_

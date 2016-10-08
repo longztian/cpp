@@ -4,8 +4,7 @@
 void MinStack::push(int v) {
   if (myData.empty()) {
     myData.emplace_back(MinStack::Node({v, v}));
-  }
-  else {
+  } else {
     auto min = myData.back().min;
     myData.emplace_back(MinStack::Node({v, std::min(min, v)}));
   }

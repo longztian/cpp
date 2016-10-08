@@ -1,5 +1,5 @@
-#ifndef PALINDROME_HPP
-#define PALINDROME_HPP
+#ifndef CTCI_6TH_EDITION_CPP_02_LINKED_LISTS_06_PALINDROME_PALINDROME_HPP_
+#define CTCI_6TH_EDITION_CPP_02_LINKED_LISTS_06_PALINDROME_PALINDROME_HPP_
 
 #include "LinkedListUnique.hpp"
 
@@ -7,4 +7,4 @@ namespace LL = LinkedListUnique;
 
 bool palindrome(const p_node_t& head);
 
-#endif
+#endif  // CTCI_6TH_EDITION_CPP_02_LINKED_LISTS_06_PALINDROME_PALINDROME_HPP_

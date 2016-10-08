@@ -1,5 +1,5 @@
-#ifndef LINKEDLISTSHARED_HPP
-#define LINKEDLISTSHARED_HPP
+#ifndef INCLUDE_LINKEDLISTSHARED_HPP_
+#define INCLUDE_LINKEDLISTSHARED_HPP_
 
 #include <initializer_list>
 #include <vector>
@@ -25,4 +25,4 @@ namespace LinkedListShared {
   std::vector<int> toVector(const p_node_t& head);
 }
 
-#endif
+#endif  // INCLUDE_LINKEDLISTSHARED_HPP_

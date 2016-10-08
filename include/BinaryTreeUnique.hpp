@@ -1,5 +1,5 @@
-#ifndef BINARYTREEUNIQUEUNIQUE_HPP
-#define BINARYTREEUNIQUEUNIQUE_HPP
+#ifndef INCLUDE_BINARYTREEUNIQUE_HPP_
+#define INCLUDE_BINARYTREEUNIQUE_HPP_
 
 #include <memory>
 #include <string>
@@ -22,4 +22,4 @@ namespace BinaryTreeUnique {
   bool equal(const p_node_t& t1, const p_node_t& t2);
 }
 
-#endif
+#endif  // INCLUDE_BINARYTREEUNIQUE_HPP_

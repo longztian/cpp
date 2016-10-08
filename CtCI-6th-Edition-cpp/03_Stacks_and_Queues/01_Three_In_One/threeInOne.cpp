@@ -3,7 +3,8 @@
 static const int SIZE = 9;
 static int buffer[SIZE];
 
-ThreeInOneStack::ThreeInOneStack(int* buffer, int size) : myBegin(buffer), myEnd(buffer+size), myTop(buffer) {};
+ThreeInOneStack::ThreeInOneStack(int* buffer, int size)
+: myBegin(buffer), myEnd(buffer+size), myTop(buffer) {}
 
 void ThreeInOneStack::push(int v) {
   if (myTop != myEnd) {

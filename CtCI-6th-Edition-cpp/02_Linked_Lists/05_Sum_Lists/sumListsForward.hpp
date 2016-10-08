@@ -1,5 +1,5 @@
-#ifndef SUMLISTSFORWARD_HPP
-#define SUMLISTSFORWARD_HPP
+#ifndef CTCI_6TH_EDITION_CPP_02_LINKED_LISTS_05_SUM_LISTS_SUMLISTSFORWARD_HPP_
+#define CTCI_6TH_EDITION_CPP_02_LINKED_LISTS_05_SUM_LISTS_SUMLISTSFORWARD_HPP_
 
 #include "LinkedListUnique.hpp"
 
@@ -7,4 +7,4 @@ namespace LL = LinkedListUnique;
 
 p_node_t sumListsForward(p_node_t& l1, p_node_t& l2);
 
-#endif
+#endif  // CTCI_6TH_EDITION_CPP_02_LINKED_LISTS_05_SUM_LISTS_SUMLISTSFORWARD_HPP_

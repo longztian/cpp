@@ -1,5 +1,5 @@
-#ifndef STACK_HPP
-#define STACK_HPP
+#ifndef INCLUDE_STACK_HPP_
+#define INCLUDE_STACK_HPP_
 
 #include "LinkedListUnique.hpp"
 
@@ -39,4 +39,4 @@ private:
   LL::Node myData;
 };
 
-#endif
+#endif  // INCLUDE_STACK_HPP_

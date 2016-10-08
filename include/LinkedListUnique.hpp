@@ -1,5 +1,5 @@
-#ifndef LINKEDLISTUNIQUE_HPP
-#define LINKEDLISTUNIQUE_HPP
+#ifndef INCLUDE_LINKEDLISTUNIQUE_HPP_
+#define INCLUDE_LINKEDLISTUNIQUE_HPP_
 
 #include <initializer_list>
 #include <vector>
@@ -25,4 +25,4 @@ namespace LinkedListUnique {
   std::vector<int> toVector(const p_node_t& head);
 }
 
-#endif
+#endif  // INCLUDE_LINKEDLISTUNIQUE_HPP_

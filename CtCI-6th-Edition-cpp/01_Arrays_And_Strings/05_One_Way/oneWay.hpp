@@ -1,8 +1,8 @@
-#ifndef ONEWAY_HPP
-#define ONEWAY_HPP
+#ifndef CTCI_6TH_EDITION_CPP_01_ARRAYS_AND_STRINGS_05_ONE_WAY_ONEWAY_HPP_
+#define CTCI_6TH_EDITION_CPP_01_ARRAYS_AND_STRINGS_05_ONE_WAY_ONEWAY_HPP_
 
 #include <string>
 
 bool oneWay(const std::string& s1, const std::string& s2);
 
-#endif
+#endif  // CTCI_6TH_EDITION_CPP_01_ARRAYS_AND_STRINGS_05_ONE_WAY_ONEWAY_HPP_

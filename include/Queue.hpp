@@ -1,5 +1,5 @@
-#ifndef QUEUE_HPP
-#define QUEUE_HPP
+#ifndef INCLUDE_QUEUE_HPP_
+#define INCLUDE_QUEUE_HPP_
 
 #include "LinkedListUnique.hpp"
 
@@ -42,4 +42,4 @@ private:
   LL::Node* myEnd;
 };
 
-#endif
+#endif  // INCLUDE_QUEUE_HPP_
