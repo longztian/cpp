@@ -6,7 +6,7 @@
 namespace LL = LinkedListUnique;
 
 class Queue {
-public:
+ public:
   Queue() : myData(LL::Node(0)) {
     myEnd = &myData;
   }
@@ -37,7 +37,7 @@ public:
     return myData.next == nullptr;
   }
 
-private:
+ private:
   LL::Node myData;
   LL::Node* myEnd;
 };

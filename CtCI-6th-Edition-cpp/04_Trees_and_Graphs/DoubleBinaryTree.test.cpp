@@ -3,7 +3,8 @@
 
 namespace BT = DoubleBinaryTree;
 
-TEST_CASE("DoubleBinaryTree: create and toString, tailing 'null's are optional", "[DoubleBinaryTree]") {
+TEST_CASE("DoubleBinaryTree: create and toString, tailing 'null's are optional",
+          "[DoubleBinaryTree]") {
   auto p = BT::create("[]");
   REQUIRE(p == nullptr);
 

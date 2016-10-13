@@ -5,8 +5,7 @@ void fillLists(const p_node_t& tree, list_vector_t& lists, int depth) {
 
   if (lists.size() == depth) {
     lists.emplace_back(std::list<int>({tree->data}));
-  }
-  else {
+  } else {
     lists[depth].push_back(tree->data);
   }
 

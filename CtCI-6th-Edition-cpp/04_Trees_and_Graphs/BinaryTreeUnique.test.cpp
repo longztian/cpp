@@ -3,7 +3,8 @@
 
 namespace BT = BinaryTreeUnique;
 
-TEST_CASE("BinaryTreeUnique: create and toString, tailing 'null's are optional", "[BinaryTreeUnique]") {
+TEST_CASE("BinaryTreeUnique: create and toString, tailing 'null's are optional",
+          "[BinaryTreeUnique]") {
   auto p = BT::create("[]");
   REQUIRE(p == nullptr);
 

@@ -4,13 +4,13 @@
 #include <stack>
 
 class StacksQueue {
-public:
+ public:
   void push(int v);
   int pop();
   int peek() const;
   bool empty() const noexcept;
 
-private:
+ private:
   mutable std::stack<int> myFront;
   mutable std::stack<int> myBack;
 };

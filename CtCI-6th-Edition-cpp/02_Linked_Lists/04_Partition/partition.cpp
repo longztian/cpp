@@ -14,8 +14,7 @@ void partition(p_node_t& head, int x) {
     if (p->data < x) {
       lTail->next.reset(p);
       lTail = p;
-    }
-    else {
+    } else {
       rTail->next.reset(p);
       rTail = p;
     }

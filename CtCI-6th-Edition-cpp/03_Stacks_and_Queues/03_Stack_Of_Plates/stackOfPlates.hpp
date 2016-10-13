@@ -5,14 +5,14 @@
 #include <memory>
 
 class SetOfStacks {
-public:
+ public:
   void push(int v);
   int pop();
   int peek() const;
   bool empty() const noexcept;
   int popAt(int index);
 
-private:
+ private:
   std::vector<std::vector<int>> myStacks;
 };
 

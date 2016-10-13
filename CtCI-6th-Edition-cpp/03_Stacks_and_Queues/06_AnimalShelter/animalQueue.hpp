@@ -17,13 +17,13 @@ struct Animal {
 using p_animal_t = std::unique_ptr<Animal>;
 
 class AnimalQueue {
-public:
+ public:
   void enqueue(Animal&& a);
   p_animal_t dequeue();
   p_animal_t dequeue(AnimalType);
   bool empty() const noexcept;
 
-private:
+ private:
   std::list<Animal> myList;
 };
 

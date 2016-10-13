@@ -5,14 +5,14 @@
 #include <vector>
 
 class MinStack {
-public:
+ public:
   void push(int v);
   int pop();
   int peek() const;
   bool empty() const noexcept;
   int min() const;
 
-private:
+ private:
   struct Node {
     int data;
     int min;

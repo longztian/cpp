@@ -33,8 +33,7 @@ void removeDups(p_node_t& head) {
     if (exist(head.get(), p, p->next->data)) {
       // duplicate, remove
       p->next.reset(p->next->next.release());
-    }
-    else {
+    } else {
       p = p->next.get();
     }
   }

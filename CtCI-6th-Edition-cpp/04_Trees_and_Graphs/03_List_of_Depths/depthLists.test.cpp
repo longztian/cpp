@@ -14,9 +14,9 @@ TEST_CASE("depthLists test", "[depthLists]") {
 
   p = BT::create("[1,2,3]");
   l = depthLists(p);
-  REQUIRE(l == list_vector_t({{1},{2},{3}}));
+  REQUIRE(l == list_vector_t({{1}, {2}, {3}}));
 
   p = BT::create("[1,2,3,4,null,null,null,null,5,null,6]");
   l = depthLists(p);
-  REQUIRE(l == list_vector_t({{1},{2,5},{3,6},{4}}));
+  REQUIRE(l == list_vector_t({{1}, {2, 5}, {3, 6}, {4}}));
 }

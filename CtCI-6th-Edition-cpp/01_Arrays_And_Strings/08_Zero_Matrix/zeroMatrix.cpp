@@ -28,8 +28,7 @@ void zeroMatrix(matrix_t& m) {
   for (auto i = 0; i < m.size(); ++i) {
     if (rowZero[i]) {
       std::fill(m[i].begin(), m[i].end(), 0);
-    }
-    else {
+    } else {
       for (auto j = 0; j < n; ++j) {
         if (colZero[j]) m[i][j] = 0;
       }

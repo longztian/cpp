@@ -6,7 +6,7 @@
 namespace LL = LinkedListUnique;
 
 class Stack {
-public:
+ public:
   Stack() : myData(LL::Node(0)) {}
 
   void push(int v) {
@@ -35,7 +35,7 @@ public:
     return myData.next == nullptr;
   }
 
-private:
+ private:
   LL::Node myData;
 };
 

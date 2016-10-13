@@ -1,11 +1,12 @@
 #include <algorithm>
+#include <utility>
 #include "rotateMatrix.hpp"
 
 // type alias
 using row_t = std::vector<int>;
 using matrix_t = std::vector<row_t>;
 
-void rotateMatrix(matrix_t& m){
+void rotateMatrix(matrix_t& m) {
   if (m.empty()) return;
 
   // validate matrix shape

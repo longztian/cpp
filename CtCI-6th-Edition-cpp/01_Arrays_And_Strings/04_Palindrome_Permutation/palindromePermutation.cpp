@@ -9,10 +9,9 @@ bool palindromePermutation(const std::string& s) {
   std::vector<int> count(26, 0);
 
   for (auto c : s) {
-    if(c >= 'a' && c <= 'z') {
+    if (c >= 'a' && c <= 'z') {
       count[c-'a'] += 1;
-    }
-    else if (c >= 'A' && c <= 'Z') {
+    } else if (c >= 'A' && c <= 'Z') {
       count[c-'A'] += 1;
     }
   }

@@ -4,14 +4,14 @@
 #include <memory>
 
 class ThreeInOneStack {
-public:
+ public:
   ThreeInOneStack(int* buffer, int size);
   void push(int v);
   int pop();
   int peek();
   bool empty();
 
-private:
+ private:
   int* myBegin;
   int* myEnd;
   int* myTop;

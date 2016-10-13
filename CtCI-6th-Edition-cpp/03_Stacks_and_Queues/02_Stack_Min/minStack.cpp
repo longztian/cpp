@@ -1,4 +1,3 @@
-#include <algorithm>
 #include "minStack.hpp"
 
 void MinStack::push(int v) {
@@ -6,7 +5,7 @@ void MinStack::push(int v) {
     myData.emplace_back(MinStack::Node({v, v}));
   } else {
     auto min = myData.back().min;
-    myData.emplace_back(MinStack::Node({v, std::min(min, v)}));
+    myData.emplace_back(MinStack::Node({v, min < v ? min : v}));
   }
 }
 

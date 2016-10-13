@@ -14,5 +14,4 @@ TEST_CASE("queue test", "[Queue]") {
   REQUIRE(q.empty() == false);
   REQUIRE(q.pop() == 2);
   REQUIRE(q.empty() == true);
-
 }

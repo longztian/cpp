@@ -1,7 +1,7 @@
 #include "stringCompression.hpp"
 
 std::string stringCompression(const std::string& s) {
-  if(s.length() < 3) return s;
+  if (s.length() < 3) return s;
 
   std::string cmp;
   cmp.reserve(s.length());
@@ -20,12 +20,10 @@ std::string stringCompression(const std::string& s) {
       if (cmp.length() + 1 + count.length() < s.length()) {
         cmp.append(1, *pB);
         cmp.append(count);
-      }
-      else {
+      } else {
         return s;
       }
-    }
-    else {
+    } else {
       // still have characters
       if (pE == end - 1) {
         // only have one character left
@@ -35,17 +33,14 @@ std::string stringCompression(const std::string& s) {
           cmp.append(1, *pE);
           cmp.append("1");
           return cmp;
-        }
-        else {
+        } else {
           return s;
         }
-      }
-      else {
+      } else {
         if (cmp.length() + 1 + count.length() < s.length()) {
           cmp.append(1, *pB);
           cmp.append(count);
-        }
-        else {
+        } else {
           return s;
         }
         // move to next character

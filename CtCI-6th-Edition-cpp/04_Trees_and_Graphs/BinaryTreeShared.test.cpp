@@ -3,7 +3,8 @@
 
 namespace BT = BinaryTreeShared;
 
-TEST_CASE("BinaryTreeShared: create and toString, tailing 'null's are optional", "[BinaryTreeShared]") {
+TEST_CASE("BinaryTreeShared: create and toString, tailing 'null's are optional",
+          "[BinaryTreeShared]") {
   auto p = BT::create("[]");
   REQUIRE(p == nullptr);
 

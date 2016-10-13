@@ -8,7 +8,7 @@ using node_height_map_t = std::unordered_map<const BinaryTreeUniqueNode*, int>;
 int getHeight(const p_node_t& root, node_height_map_t& cache) {
   if (root == nullptr) return 0;
 
-  if(cache.find(root.get()) != cache.end()) return cache.at(root.get());
+  if (cache.find(root.get()) != cache.end()) return cache.at(root.get());
 
   auto lh = getHeight(root->left, cache);
   auto rh = getHeight(root->right, cache);

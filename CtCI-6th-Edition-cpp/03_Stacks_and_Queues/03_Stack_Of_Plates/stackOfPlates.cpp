@@ -15,8 +15,7 @@ int SetOfStacks::pop() {
     auto v = myStacks.back().back();
     if (myStacks.back().size() == 1) {
       myStacks.pop_back();
-    }
-    else {
+    } else {
       myStacks.back().pop_back();
     }
     return v;
@@ -28,8 +27,7 @@ int SetOfStacks::popAt(int index) {
     auto v = myStacks[index].back();
     if (myStacks[index].size() == 1) {
       myStacks.erase(myStacks.cbegin() + index);
-    }
-    else {
+    } else {
       myStacks[index].pop_back();
     }
     return v;
