@@ -11,7 +11,7 @@ vector<int> solution(int N, vector<int> &P, vector<int> &Q) {
     vector<int> primes(N+1, 1);
     primes[0] = 0;
     primes[1] = 0;
-    
+
     int n = (int) sqrt(N);
     for (int i = 2; i <= n; ++i) {
         if (primes[i] != 1) continue;
@@ -19,7 +19,7 @@ vector<int> solution(int N, vector<int> &P, vector<int> &Q) {
             primes[j] = 0;
         }
     }
-    
+
     for (int i = 2; i <= n; ++i) {
         if (primes[i] != 1) continue;
         primes[i * i] = 2;
@@ -27,14 +27,14 @@ vector<int> solution(int N, vector<int> &P, vector<int> &Q) {
             if (primes[j / i] == 1) primes[j] = 2;
         }
     }
-    
+
     vector<int> nSemiPrimes;
     nSemiPrimes.reserve(N + 1);
     nSemiPrimes.push_back(0);
     for (int i = 1; i <= N; ++i) {
         nSemiPrimes.push_back(primes[i] == 2 ? nSemiPrimes.back() + 1 : nSemiPrimes.back());
     }
-    
+
     int M = P.size();
     vector<int> ret(M, 0);
     for (int i = 0; i < M; ++i) {
