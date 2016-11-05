@@ -23,8 +23,8 @@ public:
             if (ids.empty()) {
                 // a new island
                 id = p.first * n + p.second;
-                islands.insert(id, Positions());
-            } else if (ids.count() == 1) {
+                islands.emplace(id, Positions());
+            } else if (ids.size() == 1) {
                 // one island
                 id = *ids.begin();
              } else {
@@ -43,10 +43,11 @@ public:
     }
 
 private:
-    int myMergeIslands(set<int>& ids, unordered_map<int, Positions>& islands, Grid& grid) {
-        int id = *ids.begin();
+    int myMergeIslands(const set<int>& ids, unordered_map<int, Positions>& islands, Grid& grid) {
+        int id = *ids.cbegin();
 
-        for (auto it = ids.begin() + 1; it != ids.end(); ++it) {
+        auto it = ids.cbegin();
+        for (++it; it != ids.cend(); ++it) {
             // update id
             for (auto& p : islands[*it]) {
                 grid[p.first][p.second] = id;
@@ -59,4 +60,4 @@ private:
 
         return id;
     }
-}
+};
