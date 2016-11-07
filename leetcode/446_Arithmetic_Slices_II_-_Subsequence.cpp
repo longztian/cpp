@@ -4,22 +4,29 @@ public:
         int N = A.size();
         if (N < 3) return 0;
 
+        int minA = A.front(), maxA = A.front();
+        for (int v : A) {
+            if (minA > v) {
+                minA = v;
+            } else if (maxA < v) {
+                maxA = v;
+            }
+        }
+        long maxStep = ((long) maxA - minA + 1) / 2;
+
         unordered_map<int, Sequence> stepSeqs;
         long step;
         for (int i = 0; i < N - 1; ++i) {
             for (int j = i + 1; j < N; ++j) {
                 step = (long) A[j] - A[i];
-                cout << i << " " << j << " : " << step << endl;
-                if (step > numeric_limits<int>::max() || step < numeric_limits<int>::min()) continue;
+                if (step > maxStep || step < maxStep * -1) continue;
                 stepSeqs[step].ij[i].push_back(j);
             }
         }
 
         int n = 0;
         for (auto it = stepSeqs.begin();  it != stepSeqs.end(); ++it) {
-            cout << "step=" << it->first;
             n += it->second.count();
-            cout << endl;
         }
 
         return n;
@@ -33,39 +40,27 @@ private:
         int count() {
             if (ij.size() < 2) return 0;
 
-            int n = 0;
+            int n = 0, nSequences, seqSize;
             for (auto it = ij.begin(); it != ij.end(); ++it) {
-                vector<vector<int>> sequences;
-                vector<int> seq(1, it->first);
-                myGetSeq(sequences, seq, it->first);
-
-                for (auto& l : sequences) {
-                    cout << "SEQ: ";
-                    for (int i : l) cout << " " << i;
-                    cout << " = "<< l.size() - 2 << endl;
-                    n += (l.size() - 2);
-                }
-                cout << endl;
+                nSequences = 0;
+                seqSize = 1;
+                myCountSeqs(nSequences, seqSize, it->first);
+                n += nSequences;
             }
 
             return n;
         }
     private:
-        void myGetSeq(vector<vector<int>>& sequences, vector<int>& seq, int i) {
-            auto it = ij.find(i);
-            if (it == ij.end()) {
-                if (seq.size() > 2) sequences.push_back(seq);
-                return;
-            }
+        void myCountSeqs(int& nSequences, int& seqSize, const int i) {
+            if (seqSize > 2) nSequences += 1;
 
-            cout << "begin=" << i << " : ";
-            for (int j : it->second) cout << " " << j;
-            cout << endl;
+            auto it = ij.find(i);
+            if (it == ij.end()) return;
 
             for (int j : it->second) {
-                seq.push_back(j);
-                myGetSeq(sequences, seq, j);
-                seq.pop_back();
+                seqSize += 1;
+                myCountSeqs(nSequences, seqSize, j);
+                seqSize -= 1;
             }
         }
     };
