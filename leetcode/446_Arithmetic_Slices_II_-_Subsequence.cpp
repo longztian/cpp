@@ -40,28 +40,29 @@ private:
         int count() {
             if (ij.size() < 2) return 0;
 
-            int n = 0, nSequences, seqSize;
+            int n = 0;
+            vector<int> cache(1000, 0);
             for (auto it = ij.begin(); it != ij.end(); ++it) {
-                nSequences = 0;
-                seqSize = 1;
-                myCountSeqs(nSequences, seqSize, it->first);
-                n += nSequences;
+                n += (myCountSeqs(it->first, cache) - 1 - it->second.size());
             }
 
             return n;
         }
     private:
-        void myCountSeqs(int& nSequences, int& seqSize, const int i) {
-            if (seqSize > 2) nSequences += 1;
+        int myCountSeqs(const int i, vector<int>& cache) {
+            if (cache[i] > 0) return cache[i];
+
+            int n = 1;
 
             auto it = ij.find(i);
-            if (it == ij.end()) return;
-
-            for (int j : it->second) {
-                seqSize += 1;
-                myCountSeqs(nSequences, seqSize, j);
-                seqSize -= 1;
+            if (it != ij.end()) {
+                for (int j : it->second) {
+                    n += myCountSeqs(j, cache);
+                }
             }
+
+            cache[i] = n;
+            return n;
         }
     };
 };
