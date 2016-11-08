@@ -49,16 +49,16 @@ TEST_CASE("test 127_Word_Ladder", "[127_Word_Ladder]") {
   unordered_set<string> list;
 
   list = unordered_set<string>({"a", "b", "c"});
-  REQUIRE(2 == Solution().ladderLength("a", "c", list));
+  REQUIRE(2 == s.ladderLength("a", "c", list));
 
   list = unordered_set<string>({"hot", "dog"});
-  REQUIRE(0 == Solution().ladderLength("hot", "dog", list));
+  REQUIRE(0 == s.ladderLength("hot", "dog", list));
 
   list = unordered_set<string>({"hot", "dog", "dot"});
-  REQUIRE(3 == Solution().ladderLength("hot", "dog", list));
+  REQUIRE(3 == s.ladderLength("hot", "dog", list));
 
   list = unordered_set<string>({"hot", "dot", "dog", "lot", "log"});
-  REQUIRE(5 == Solution().ladderLength("hit", "cog", list));
+  REQUIRE(5 == s.ladderLength("hit", "cog", list));
 }
 
 # build test again
