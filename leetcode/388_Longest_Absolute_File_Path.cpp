@@ -14,18 +14,19 @@ public:
     };
 
     int lengthLongestPath(string input) {
-        const char *pb = input.data(), *pe, *end = input.data() + input.size();
+        const char *pb = input.data(), *pe = pb, *end = pb + input.size();
         bool isFile = false;
 
         while (pe < end && *pe != '\n' ) {
             if (*pe == '.') isFile = true;
             ++pe;
         }
-        pb = pe + 1;
 
         if (isFile) return pe - pb;
 
         NodePtr root = make_shared<Node>(pe - pb);
+        pb = pe + 1;
+
         vector<NodePtr> files;
 
         NodePtr parent = root;
@@ -33,47 +34,29 @@ public:
         while (pb < end) {
             while (pb < end && *pb == '\t') ++pb;
             levelNew = pb - pe - 1;
-
-            if (levelNew > level) {
-                // a new child
-                NodePtr n = make_shared<Node>(parent);
-                parent->children.push_back(n);
-
-                pe = pb + 1;
-                while (pe < end && *pe != '\n') {
-                    if (*pe == '.') isFile = true;
-                    ++pe;
-                }
-
-                if (isFile) files.push_back(n);
-                n->length = pe - pb;
-
-                // check next level
-                level = levelNew;
-                parent = n;
-                pb = pe + 1;
-            } else {
-                // same or upper level
-                while (level > levelNew) {
-                    parent = parent->parent;
-                    level -= 1;
-                }
-
-                NodePtr n = make_shared<Node>(parent);
-                parent->children.push_back(n);
-
-                pe = pb + 1;
-                while (pe < end && *pe != '\n') {
-                    if (*pe == '.') isFile = true;
-                    ++pe;
-                }
-
-                if (isFile) files.push_back(n);
-
-                n->length = pe - pb;
-                parent = n;
-                pb = pe + 1;
+            while (level > levelNew) {
+                parent = parent->parent;
+                level -= 1;
             }
+
+            // child
+            NodePtr n = make_shared<Node>(parent);
+            parent->children.push_back(n);
+
+            isFile = false;
+            pe = pb + 1;
+            while (pe < end && *pe != '\n') {
+                if (*pe == '.') isFile = true;
+                ++pe;
+            }
+
+            if (isFile) files.push_back(n);
+            n->length = pe - pb + 1;
+
+            // check next level
+            level += 1;
+            parent = n;
+            pb = pe + 1;
         }
 
         int len, maxLength = numeric_limits<int>::min();
@@ -86,6 +69,6 @@ public:
             if (maxLength < len) maxLength = len;
         }
 
-        return len;
+        return maxLength;
     }
 };
