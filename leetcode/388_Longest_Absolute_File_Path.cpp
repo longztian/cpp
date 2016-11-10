@@ -1,74 +1,41 @@
 class Solution {
 public:
-    struct Node;
-    using NodePtr = shared_ptr<Node>;
-
-    struct Node {
-        int length;
-        NodePtr parent;
-        vector<NodePtr> children;
-
-        Node(NodePtr p) : length(0), parent(p) {}
-        Node(int len) : length(len), parent(nullptr) {}
-        Node(int len, NodePtr p) : length(len), parent(p) {}
-    };
-
     int lengthLongestPath(string input) {
-        const char *pb = input.data(), *pe = pb, *end = pb + input.size();
-        bool isFile = false;
+        vector<int> length(1, 0);
+        bool isFile;
+        int level, len, maxlen = 0;
 
-        while (pe < end && *pe != '\n' ) {
-            if (*pe == '.') isFile = true;
-            ++pe;
-        }
-
-        if (isFile) return pe - pb;
-
-        NodePtr root = make_shared<Node>(pe - pb);
-        pb = pe + 1;
-
-        vector<NodePtr> files;
-
-        NodePtr parent = root;
-        int level = 1, levelNew;
-        while (pb < end) {
-            while (pb < end && *pb == '\t') ++pb;
-            levelNew = pb - pe - 1;
-            while (level > levelNew) {
-                parent = parent->parent;
-                level -= 1;
+        for (int i = 0, n = input.size(); i < n; ++i) {
+            // check level
+            level = 0;
+            while (i < n && input[i] == '\t') {
+                ++level;
+                ++i;
             }
 
-            // child
-            NodePtr n = make_shared<Node>(parent);
-            parent->children.push_back(n);
-
+            // check file
+            len = 0;
             isFile = false;
-            pe = pb + 1;
-            while (pe < end && *pe != '\n') {
-                if (*pe == '.') isFile = true;
-                ++pe;
+            while (i < n && input[i] != '\n') {
+                if (input[i] == '.') isFile = true;
+                ++len;
+                ++i;
             }
 
-            if (isFile) files.push_back(n);
-            n->length = pe - pb + 1;
-
-            // check next level
-            level += 1;
-            parent = n;
-            pb = pe + 1;
-        }
-
-        int len, maxLength = numeric_limits<int>::min();
-        for (auto& p : files) {
-            len = p->length;
-            while (p->parent) {
-                p = p->parent;
-                len += p->length;
+            // isFile
+            if (isFile) {
+                maxlen = max(maxlen, length[level] + len);
+            } else {
+                if (level + 1 < length.size()) {
+                    length[level + 1] = length[level] + len + 1;
+                } else if (level + 1 == length.size()) {
+                    length.push_back(length.back() + len + 1);
+                } else {
+                    cout << "input error" << endl;
+                }
             }
-            if (maxLength < len) maxLength = len;
         }
 
-        return maxLength;
+        return maxlen;
     }
 };
