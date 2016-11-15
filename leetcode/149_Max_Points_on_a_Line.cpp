@@ -78,8 +78,9 @@ public:
         }
 
         const int NP = pointCounts.size();
+
         int n = 2, i = 0;
-        vector<const unordered_map<Point, int>::value_type*> pointCountPointers(pointCounts.size());
+        vector<const unordered_map<Point, int>::value_type*> pointCountPointers(NP);
         for (auto& pc : pointCounts) {
             pointCountPointers[i++] = &pc;
             if (n < pc.second) n = pc.second;
