@@ -73,18 +73,19 @@ public:
         if (points.size() < 3) return points.size();
 
         unordered_map<Point, int> pointCounts;
-        for (auto& pnt : points) {
-            pointCounts[pnt] += 1;
-        }
+        for (auto& pnt : points) pointCounts[pnt] += 1;
 
         const int NP = pointCounts.size();
 
-        int n = 2, i = 0;
-        vector<const unordered_map<Point, int>::value_type*> pointCountPointers(NP);
-        for (auto& pc : pointCounts) {
-            pointCountPointers[i++] = &pc;
-            if (n < pc.second) n = pc.second;
+        int n = 0;
+        if (NP < 3) {
+            for (auto& pc : pointCounts) n += pc.second;
+            return n;
         }
+
+        int i = 0;
+        vector<const unordered_map<Point, int>::value_type*> pointCountPointers(NP);
+        for (auto& pc : pointCounts) pointCountPointers[i++] = &pc;
 
         vector<vector<int>> visited(NP, vector<int>(NP, 0));
         unordered_map<Line, vector<int>> linePoints;
@@ -96,10 +97,8 @@ public:
                 if (visited[i][j] == 0) {
                     ln.setPoints(pi.first, pointCountPointers[j]->first);
                     linePoints[ln].push_back(j);
-                    visited[i][j] = 1;
                 }
             }
-
 
             for (auto& lp : linePoints) {
                 int count = pi.second;
