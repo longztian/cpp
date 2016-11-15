@@ -50,7 +50,7 @@ struct Line {
 namespace std {
 template <> struct hash<Line> {
     size_t operator()(const Line& ln) const {
-        return hash<float>()((float) ln.f != 0 ? ln.k / ln.f : ln.b);
+        return hash<long>()(ln.f != 0 ? ln.b / ln.f : ln.b);
     }
 };
 
