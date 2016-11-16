@@ -50,8 +50,8 @@ private:
 
     int myGetMaxSum(SumTreeNode* root) {
         int maxSum = root->val;
-        maxSum = max(maxSum, maxSum + root->maxLeft);
-        maxSum = max(maxSum, maxSum + root->maxRight);
+        if (root->maxLeft > 0) maxSum += root->maxLeft;
+        if (root->maxRight > 0) maxSum += root->maxRight;
 
         if (root->left) {
             int maxLeft = myGetMaxSum(root->left);
