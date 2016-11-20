@@ -1,3 +1,5 @@
+namespace {
+
 unordered_map<char, char> digits({
   {'0', '0'},
   {'1', '1'},
@@ -5,6 +7,8 @@ unordered_map<char, char> digits({
   {'8', '8'},
   {'9', '6'}
 });
+
+}
 
 class Solution {
 public:

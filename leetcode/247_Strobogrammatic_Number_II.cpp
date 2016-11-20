@@ -1,3 +1,5 @@
+namespace {
+
 vector<char> first     ({'1', '6', '8', '9'});
 vector<char> firstMatch({'1', '9', '8', '6'});
 
@@ -5,6 +7,8 @@ vector<char> digit     ({'0', '1', '6', '8', '9'});
 vector<char> digitMatch({'0', '1', '9', '8', '6'});
 
 vector<char> single    ({'0', '1', '8'});
+
+}
 
 class Solution {
 public:
