@@ -18,7 +18,7 @@ public:
 };
 
 // O(1) space
-// mark number by *= -1, so can change the values back
+// mark number by *= -1 (not = 0), so can change the existing values back
 class Solution {
 public:
     vector<int> findDisappearedNumbers(vector<int>& nums) {
@@ -28,7 +28,7 @@ public:
         for (int i = 0; i < n; ++i) {
             if (nums[i] > 0) {
                 int j = nums[i] - 1, tmp;
-                while (nums[j] != 0) {
+                while (nums[j] > 0) {
                     tmp = nums[j] - 1;
                     nums[j] *= -1;
                     j = tmp;
