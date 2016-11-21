@@ -1,4 +1,4 @@
-// BFS topological sort, In-Degree, queue
+// BFS topological sort, In-Degree, queue, add head/root first
 class Solution {
 public:
     vector<int> findOrder(int numCourses, vector<pair<int, int>>& prerequisites) {
@@ -43,7 +43,7 @@ private:
     }
 };
 
-// DFS, stack
+// DFS, stack, add tail/leaf first
 class Solution {
 public:
     vector<int> findOrder(int numCourses, vector<pair<int, int>>& prerequisites) {
