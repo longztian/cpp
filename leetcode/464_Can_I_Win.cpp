@@ -1,46 +1,38 @@
-using Key = pair<int, unordered_set<int>>;
-
-namespace std {
-template <> struct hash<Key> {
-    size_t operator()(const Key& k) const {
-        return hash<int>()(k.first);
-    }
-};
-}
-
 class Solution {
 public:
     bool canIWin(int maxChoosableInteger, int desiredTotal) {
-        if (desiredTotal <= maxChoosableInteger) return true;
-        if (desiredTotal == maxChoosableInteger + 1) return false;
-        if (desiredTotal == maxChoosableInteger + 2) return true;
+        if (desiredTotal <= 1 || desiredTotal <= maxChoosableInteger) return true;
 
-        unordered_set<int> nums;
-        for (int i = 1; i <= maxChoosableInteger; ++i) nums.insert(i);
+        long sum = ((long) maxChoosableInteger + 1) * maxChoosableInteger / 2;
+        if (desiredTotal > sum) return false;
+        if (desiredTotal == sum) return maxChoosableInteger % 2 == 1;
 
-        return myDP(nums, desiredTotal, true);
+        vector<bool> nums(maxChoosableInteger + 1, true);
+        unordered_map<vector<bool>, bool> cache;
+
+        return myDP(desiredTotal, nums, cache);
     }
 
 private:
-    bool myDP(unordered_set<int>& nums, int total, bool myTurn) {
-        if (total <= 0) return !myTurn;
-        if (nums.find(total) != nums.end()) return myTurn;
+    bool myDP(int total, vector<bool>& nums, unordered_map<vector<bool>, bool>& cache) {
+        auto it = cache.find(nums);
+        if (it != cache.end()) return it->second;
 
-        auto it = myWin.find({total, nums});
-        if (it == myWin.end()) {
-            bool win = false;
-            for (int i : nums) {
-                nums.erase(i);
-                win = myDP(nums, total - i, !myTurn);
-                nums.insert(i);
-                if (win) break;
-            }
-            it = myWin.insert({make_pair(total, nums), win}).first;
+        bool win = false;
+
+        for (int i = total; !win && i < nums.size(); ++i) {
+            if (nums[i]) win = true;
         }
 
-        return myTurn && it->second;
+        for (int i = 1, n = min((int) nums.size(), total); !win && i < n; ++i) {
+            if (nums[i]) {
+                nums[i] = false;
+                win = !myDP(total - i, nums, cache); // win in current path, if next player would always lose
+                nums[i] = true;
+            }
+        }
+
+        cache[nums] = win;
+        return win;
     }
-
-    unordered_map<Key, bool> myWin;
-
 };
