@@ -36,3 +36,63 @@ private:
         return win;
     }
 };
+
+
+// minimax
+// only has two scores: true / false
+using Cache = unordered_map<vector<bool>, bool>;
+
+class Solution {
+public:
+    bool canIWin(int maxChoosableInteger, int desiredTotal) {
+        long sum = ((long) maxChoosableInteger + 1) * maxChoosableInteger / 2;
+        if (sum < desiredTotal) return false;
+
+        Cache maxCache, minCache;
+        vector<bool> state(maxChoosableInteger + 1, true);
+        return myMiniMax(state, desiredTotal, true, maxCache, minCache);
+    }
+
+private:
+    bool myMiniMax(vector<bool>& state, int total, bool isMaxPlayer, Cache& maxCache, Cache& minCache) {
+        if (isMaxPlayer) {
+            auto it = maxCache.find(state);
+            if (it != maxCache.end()) return it->second;
+
+            bool maxScore = false;
+            for (int i = total; !maxScore && i < state.size(); ++i) {
+                if (state[i]) maxScore = true;
+            }
+
+            for (int i = 1, n = min(total, (int) state.size()); !maxScore && i < n; ++i) {
+                if (state[i]) {
+                    state[i] = false;
+                    maxScore = myMiniMax(state, total - i, !isMaxPlayer, maxCache, minCache);
+                    state[i] = true;
+                }
+            }
+
+            maxCache[state] = maxScore;
+            return maxScore;
+        } else {
+            auto it = minCache.find(state);
+            if (it != minCache.end()) return it->second;
+
+            bool minScore = true;
+            for (int i = total; minScore && i < state.size(); ++i) {
+                if (state[i]) minScore = false;
+            }
+
+            for (int i = 1, n = min(total, (int) state.size()); minScore && i < n; ++i) {
+                if (state[i]) {
+                    state[i] = false;
+                    minScore = myMiniMax(state, total - i, !isMaxPlayer, maxCache, minCache);
+                    state[i] = true;
+                }
+            }
+
+            minCache[state] = minScore;
+            return minScore;
+        }
+    }
+};
