@@ -62,6 +62,7 @@ private:
  */
 
 
+
 // O(1) get() set()
 struct Node {
     int key;
@@ -74,7 +75,6 @@ struct Frequency {
     int freq;
     list<Node> nodes;
 
-    Frequency() : freq(1) {}
     Frequency(int freq) : freq(freq) {}
 };
 
