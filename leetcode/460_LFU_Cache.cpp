@@ -66,27 +66,32 @@ private:
 struct Node {
     int key;
     int value;
-    int freq;
 
-    Node(int key, int value) : key(key), value(value), freq(1) {}
+    Node(int key, int value) : key(key), value(value) {}
+};
+
+struct Frequency {
+    int freq;
+    list<Node> nodes;
+
+    Frequency() : freq(1) {}
+    Frequency(int freq) : freq(freq) {}
 };
 
 using DataList = list<Node>;
-using DataListList = list<DataList>;
-using DataMap = unordered_map<int, pair<DataListList::iterator, DataList::iterator>>;
+using FreqList = list<Frequency>;
+using DataMap = unordered_map<int, pair<FreqList::iterator, DataList::iterator>>;
 
 class LFUCache {
 public:
-    LFUCache(int capacity) : myCapacity(capacity) {
-
-    }
+    LFUCache(int capacity) : myCapacity(capacity) {}
 
     int get(int key) {
         auto it = myLookup.find(key);
         if (it == myLookup.end()) return -1;
 
         myTouch(it);
-        return it->second->second->value;
+        return it->second.second->value;
     }
 
     void set(int key, int value) {
@@ -95,53 +100,41 @@ public:
         auto it = myLookup.find(key);
         if (it == myLookup.end()) {
             if (myLookup.size() == myCapacity) {
-                myLookup.erase(myData.front().front().key);
-                if (myData.front().size() == 1) myData.pop_front();
-                else myData.front().pop_front();
+                myLookup.erase(myData.front().nodes.front().key);
+                if (myData.front().nodes.size() == 1) myData.pop_front();
+                else myData.front().nodes.pop_front();
             }
-            if (myData.front().front().freq > 1) myData.push_front(NodeList());
-            myLookup[key] = make_pair(myData.begin(), myData.front().insert(myData.front().end(), Node(key, value));
-
+            if (myData.empty() || myData.front().freq > 1) myData.push_front(Frequency(1));
+            myData.front().nodes.emplace_back(key, value);
+            myLookup[key] = make_pair(myData.begin(), --myData.front().nodes.end());
         } else {
             myTouch(it);
-            it->second->second->value = value;
+            it->second.second->value = value;
         }
     }
 
 private:
     int myCapacity;
     DataMap myLookup;
-    DataListList myData;
+    FreqList myData;
 
-    void myTouch(DataMap::iterator it) {
-        ++it->second->second->freq;
+    void myTouch(const DataMap::iterator it) {
+        auto itNode = it->second.second;
+        auto itFreq = it->second.first, itFreqNext = itFreq;
+        ++itFreqNext;
 
-        auto itNext = it->second->first;
-        ++itNext;
-
-        if (it->second->first->size() == 1) {
-            if (itNext->front().freq == it->second->second->freq) {
-                itNext->push_back(*it->second->second);
-                myData.erase(it->second->first);
-                it->second = make_pair(itNext, --itNext.end());
-            }
-        } else {
-            if (itNext->front().freq > it->second->second->freq) {
-                itNext = myData.insert(NodeList());
-            }
-            itNext->push_back(*it->second->second)
-            it->second->first->erase(it->second->second);
-            it->second = make_pair(itNext, itNext.begin());
+        if (itFreqNext == myData.end() || itFreqNext->freq > itFreq->freq + 1) {
+            itFreqNext = myData.insert(itFreqNext, Frequency(itFreq->freq + 1));
         }
-        auto i = myData.erase(it->second);
-        while (i != myData.end() && i->freq <= n.freq) ++i;
-        it->second = myData.insert(i, n);
+
+        it->second.second = itFreqNext->nodes.insert(itFreqNext->nodes.end(), *itNode);
+
+        if (itFreq->nodes.size() == 1) {
+            myData.erase(itFreq);
+        } else {
+            itFreq->nodes.erase(itNode);
+        }
+
+        it->second.first = itFreqNext;
     }
 };
-
-/**
- * Your LFUCache object will be instantiated and called as such:
- * LFUCache obj = new LFUCache(capacity);
- * int param_1 = obj.get(key);
- * obj.set(key,value);
- */
