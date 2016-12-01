@@ -1,4 +1,4 @@
-using WordMap = unordered_set<string>;
+using WordSet = unordered_set<string>;
 using CacheMap = unordered_map<const char*, bool>;
 
 class Solution {
@@ -10,7 +10,7 @@ public:
     }
 
 private:
-    bool myWordBreak(const char* b, const char* e, const WordMap& wordDict, CacheMap& cache) {
+    bool myWordBreak(const char* b, const char* e, const WordSet& wordDict, CacheMap& cache) {
         auto it = cache.find(b);
         if (it != cache.end()) return it->second;
 
