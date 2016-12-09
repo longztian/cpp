@@ -32,6 +32,11 @@ int main() {
       trade.load(line);
       tradeStats[trade.symbolId].add(trade);
     }
+
+    if (!in.eof()) {
+      std::cerr << "Error while reading file " << infile << std::endl;
+      return 1;
+    }
   }  // input file get closed here
 
   {  // output trade statistics per symbol
@@ -41,15 +46,22 @@ int main() {
       return 1;
     }
 
-    out.exceptions(std::ofstream::failbit | std::ofstream::badbit);
     std::string symbol(3, 'a');
     for (int32_t i = 0; i < N; ++i) {
       if (tradeStats[i].getTotalVolume() > 0) {
         Symbol::getSymbol(i, symbol);
         out << symbol << ',' << tradeStats[i] << '\n';
+        if (out.fail()) break;
       }
     }
-  }  // output file get flushed and closed here
+
+    if (out.good()) out.flush();
+
+    if (out.fail()) {
+      std::cerr << "Error while writing file " << outfile << std::endl;
+      return 1;
+    }
+  }  // output file get closed here
 
   return 0;
 }
