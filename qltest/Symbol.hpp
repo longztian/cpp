@@ -19,10 +19,10 @@ int32_t getId(const char* p) {
 }
 
 inline
-void getSymbol(int32_t id, std::string& symbol) {
-  symbol[0] = 'a' + id / BASE2;
-  symbol[1] = 'a' + id % BASE2 / BASE;
-  symbol[2] = 'a' + id % BASE;
+void getSymbol(int32_t id, char* symbol) {
+  *symbol       = 'a' + id / BASE2;
+  *(symbol + 1) = 'a' + id % BASE2 / BASE;
+  *(symbol + 2) = 'a' + id % BASE;
 }
 
 }  // namespace Symbol

@@ -13,16 +13,17 @@ TEST_CASE("get id from symbol string", "[Symbol]") {
 
 TEST_CASE("get symbol from id", "[Symbol]") {
   std::string symbol(3, 'a');
+  char* p = const_cast<char*>(symbol.data());  // lack of non-const data() before C++17
 
-  Symbol::getSymbol(0, symbol);
+  Symbol::getSymbol(0, p);
   REQUIRE(symbol == "aaa");
 
-  Symbol::getSymbol(Symbol::BASE2 - 1, symbol);
+  Symbol::getSymbol(Symbol::BASE2 - 1, p);
   REQUIRE(symbol == "azz");
 
-  Symbol::getSymbol((Symbol::BASE2 - 1) * Symbol::BASE, symbol);
+  Symbol::getSymbol((Symbol::BASE2 - 1) * Symbol::BASE, p);
   REQUIRE(symbol == "zza");
 
-  Symbol::getSymbol(Symbol::BASE3 - 1, symbol);
+  Symbol::getSymbol(Symbol::BASE3 - 1, p);
   REQUIRE(symbol == "zzz");
 }

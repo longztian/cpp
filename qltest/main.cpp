@@ -26,9 +26,10 @@ int main() {
       return 1;
     }
 
-    std::string line;
+    const int LENGTH = 40;
+    char line[LENGTH];
     QLTest::Trade trade;
-    while (getline(in, line)) {
+    while (in.getline(line, LENGTH)) {
       trade.load(line);
       tradeStats[trade.symbolId].add(trade);
     }
@@ -46,7 +47,8 @@ int main() {
       return 1;
     }
 
-    std::string symbol(3, 'a');
+    const int LENGTH = 4;
+    char symbol[LENGTH] = "aaa";
     for (int32_t i = 0; i < N; ++i) {
       if (tradeStats[i].getTotalVolume() > 0) {
         Symbol::getSymbol(i, symbol);
