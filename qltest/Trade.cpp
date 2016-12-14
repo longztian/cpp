@@ -4,7 +4,7 @@
 
 namespace QLTest {
 
-void Trade::load(const char* record) {
+void Trade::load(const char* const record) {
   char* p  = nullptr;
   time     = std::strtoll(record, &p, 10);
   symbolId = Symbol::getId(p + 1);

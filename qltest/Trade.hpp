@@ -15,7 +15,7 @@ struct Trade {
   int32_t quantity;
   int32_t price;
 
-  void load(const char* record);
+  void load(const char* const record);
 };
 
 }  // namespace QLTest
