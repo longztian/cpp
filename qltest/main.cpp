@@ -1,6 +1,5 @@
 #include <cstdint>
 #include <vector>
-#include <string>
 #include <iostream>
 #include <fstream>
 #include "Symbol.hpp"
@@ -10,7 +9,7 @@
 const char * const infile = "input.csv";
 const char * const outfile = "output.csv";
 
-namespace Symbol = ::QLTest::Symbol;
+namespace Symbol = QLTest::Symbol;
 
 using std::int32_t;
 
