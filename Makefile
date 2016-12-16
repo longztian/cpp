@@ -11,7 +11,7 @@ endif
 
 CXX := g++
 #CXX := clang++
-CXXFLAGS := -g -fPIC -std=c++1z -I$(INCLUDE)
+CXXFLAGS := -g -Wall -fPIC -std=c++1z -I$(INCLUDE)
 
 SRC := $(shell find . -name "*.cpp")
 OBJ := $(patsubst %.cpp, %.o, $(SRC))
