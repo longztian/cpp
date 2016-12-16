@@ -1,27 +1,34 @@
-#include <algorithm>
 #include "Stats.hpp"
+#include "stat/MaxTimeGap.hpp"
+#include "stat/MaxPrice.hpp"
+#include "stat/TotalVolume.hpp"
+#include "stat/WeightedAveragePrice.hpp"
 
 namespace QLTest {
 
-void Stats::add(const Trade& trade) {
-  myMaxTimeGap = myLastTime >= 0 ? std::max(myMaxTimeGap, trade.time - myLastTime) : 0;
-  myMaxPrice = std::max(myMaxPrice, trade.price);
-  myTotalVolume += trade.quantity;
-  myTotalPrice += trade.price * trade.quantity;
+Stats::Stats() : myStats({
+  new Stat::MaxTimeGap(),
+  new Stat::TotalVolume(),
+  new Stat::WeightedAveragePrice(),
+  new Stat::MaxPrice()
+}) {}
 
-  myLastTime = trade.time;
+Stats::~Stats() {
+  for (auto p : myStats) delete p;
 }
 
-}  // namespace QLTest
+void Stats::add(const Trade& trade) {
+  for (auto p : myStats) p->add(trade);
+}
 
-std::ostream& operator << (std::ostream& os, const QLTest::Stats& rhs) {
-  os << rhs.getMaxTimeGap()
-     << ','
-     << rhs.getTotalVolume()
-     << ','
-     << rhs.getWeightedAveragePrice()
-     << ','
-     << rhs.getMaxPrice();
+std::ostream& operator << (std::ostream& os, const Stats& rhs) {
+  if (!rhs.myStats.empty())
+    os << rhs.myStats[0]->getResult();
+
+  for (int i = 1, n = rhs.myStats.size(); i < n; ++i)
+    os << ',' << rhs.myStats[i]->getResult();
 
   return os;
 }
+
+}  // namespace QLTest

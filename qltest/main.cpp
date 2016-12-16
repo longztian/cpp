@@ -1,4 +1,5 @@
 #include <cstdint>
+#include <vector>
 #include <string>
 #include <iostream>
 #include <fstream>
@@ -16,8 +17,7 @@ using std::int32_t;
 const int32_t N = Symbol::BASE3;
 
 int main() {
-  // use stack for speed
-  QLTest::Stats tradeStats[N];
+  std::vector<QLTest::Stats*> stats(N, nullptr);
 
   {  // load trade records from input file
     std::ifstream in(infile);
@@ -31,7 +31,9 @@ int main() {
     QLTest::Trade trade;
     while (in.getline(line, LENGTH)) {
       trade.load(line);
-      tradeStats[trade.symbolId].add(trade);
+      if (stats[trade.symbolId] == nullptr)
+        stats[trade.symbolId] = new QLTest::Stats();
+      stats[trade.symbolId]->add(trade);
     }
 
     if (!in.eof()) {
@@ -50,9 +52,9 @@ int main() {
     const int LENGTH = 4;
     char symbol[LENGTH] = "aaa";
     for (int32_t i = 0; i < N; ++i) {
-      if (tradeStats[i].getTotalVolume() > 0) {
+      if (stats[i]) {
         Symbol::getSymbol(i, symbol);
-        out << symbol << ',' << tradeStats[i] << '\n';
+        out << symbol << ',' << *stats[i] << '\n';
         if (out.fail()) break;
       }
     }
@@ -64,6 +66,10 @@ int main() {
       return 1;
     }
   }  // output file get closed here
+
+  for (auto p : stats) {
+    if (p) delete p;
+  }
 
   return 0;
 }
