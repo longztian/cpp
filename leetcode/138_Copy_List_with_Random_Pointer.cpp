@@ -16,8 +16,6 @@ public:
         RandomListNode dummyOld(0), dummyNew(0);
         dummyOld.next = head;
 
-
-
         for (auto pOld = &dummyOld, pNew = &dummyNew; pOld->next; pOld = pOld->next, pNew = pNew->next) {
             pNew->next = new RandomListNode(pOld->next->label);
             pointerMap.emplace(pOld->next, pNew->next);
