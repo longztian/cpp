@@ -9,34 +9,32 @@
 class Solution {
 public:
     ListNode* reverseBetween(ListNode* head, int m, int n) {
-        ListNode *p, *pEnd1, *pEnd2, *dummy0 = new ListNode(0), *dummy = new ListNode(0);
+        if (m == n) return head;
+        n = n - m + 1;
 
-        dummy0->next = head;
-        head = dummy0;
+        ListNode dummy(0);
+        dummy.next = head;
 
-        for (int i = 1; i < m; ++i) {
-            head = head->next;
+        auto pE = &dummy;
+        while (--m) pE = pE->next;
+
+        ListNode dummyR(0);
+        auto pRE = pE->next, p = pRE->next;
+        dummyR.next = pRE;
+
+        ListNode* pNext = nullptr;
+        while (--n) {
+            pNext = p->next;
+
+            p->next = dummyR.next;
+            dummyR.next = p;
+
+            p = pNext;
         }
 
-        pEnd1 = head;
-        pEnd2 = head->next;
+        pE->next = dummyR.next;
+        pRE->next = p;
 
-        head = head->next;
-
-        for (int i = m; i <= n; ++i) {
-            p = head->next;
-            head->next = dummy->next;
-            dummy->next = head;
-            head = p;
-        }
-
-        pEnd1->next = dummy->next;
-        if (head) pEnd2->next = head;
-        p = dummy0->next;
-
-        delete dummy0;
-        delete dummy;
-
-        return p;
+        return dummy.next;
     }
 };

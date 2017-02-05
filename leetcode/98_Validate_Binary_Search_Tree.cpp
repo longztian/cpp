@@ -17,11 +17,14 @@ public:
     }
 
 private:
-    bool myInOrder(TreeNode* root, TreeNode** last) {
-        if (root->left && !myInOrder(root->left, last)) return false;
-        if (*last && (*last)->val >= root->val) return false;
-        *last = root;
-        if (root->right && !myInOrder(root->right, last)) return false;
+    bool myInOrder(TreeNode* pRoot, TreeNode** ppLast) {
+        if (pRoot->left && !myInOrder(pRoot->left, ppLast)) return false;
+
+        if (*ppLast && (*ppLast)->val >= pRoot->val) return false;
+        *ppLast = pRoot;
+
+        if (pRoot->right && !myInOrder(pRoot->right, ppLast)) return false;
+
         return true;
     }
 };

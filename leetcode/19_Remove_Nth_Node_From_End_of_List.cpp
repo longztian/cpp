@@ -12,27 +12,26 @@ public:
         if (n <= 0) return head;
 
         auto p = head;
-        while(n && p) {
+        while (n && p) {
             p = p->next;
             --n;
         }
 
-        auto dummy = new ListNode(0);
-        dummy->next = head;
+        if (n) return head;
 
-        auto q = dummy;
-        while(p) {
-            q = q->next;
+        ListNode dummy(0);
+        dummy.next = head;
+
+        auto q = &dummy;
+        while (p) {
             p = p->next;
+            q = q->next;
         }
 
         p = q->next;
         q->next = p->next;
         delete p;
 
-        p = dummy->next;
-        delete dummy;
-
-        return p;
+        return dummy.next;
     }
 };

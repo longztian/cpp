@@ -111,7 +111,7 @@ public:
             que.pop();
         }
 
-        return find_if(indegree.begin(), indegree.end(), [](int v) {return v > 0;}) == indegree.end();
+        return find_if(indegree.begin(), indegree.end(), [](int v) { return v > 0; }) == indegree.end();
     }
 
 private:
