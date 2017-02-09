@@ -18,12 +18,16 @@ int ThreeInOneStack::pop() {
     myTop -= 1;
     return *(myTop);
   }
+
+  return -1;
 }
 
 int ThreeInOneStack::peek() {
   if (myTop != myBegin) {
     return *(myTop-1);
   }
+
+  return -1;
 }
 
 bool ThreeInOneStack::empty() {

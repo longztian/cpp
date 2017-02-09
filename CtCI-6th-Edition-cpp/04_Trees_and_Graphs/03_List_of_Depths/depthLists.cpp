@@ -3,7 +3,7 @@
 void fillLists(const p_node_t& tree, list_vector_t& lists, int depth) {
   if (tree == nullptr) return;
 
-  if (lists.size() == depth) {
+  if (lists.size() == static_cast<size_t>(depth)) {
     lists.emplace_back(std::list<int>({tree->data}));
   } else {
     lists[depth].push_back(tree->data);

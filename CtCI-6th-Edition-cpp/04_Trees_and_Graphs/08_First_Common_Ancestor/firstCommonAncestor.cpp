@@ -4,7 +4,7 @@
 p_node_t traverse(const p_node_t& root, const p_node_t& node, std::vector<int>& move, int depth) {
   if (root == nullptr) return nullptr;
 
-  if (move.size() == depth) move.push_back(0);
+  if (move.size() == static_cast<size_t>(depth)) move.push_back(0);
   if (root == node) return node;
 
   auto p = traverse(root->left, node, move, depth+1);

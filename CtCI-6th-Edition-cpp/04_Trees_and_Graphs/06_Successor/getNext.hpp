@@ -3,6 +3,6 @@
 
 #include "DoubleBinaryTree.hpp"
 
-p_node_t getNext(const p_node_t& node);
+DoubleBinaryTreeNode* getNext(const p_node_t& node);
 
 #endif  // CTCI_6TH_EDITION_CPP_04_TREES_AND_GRAPHS_06_SUCCESSOR_GETNEXT_HPP_

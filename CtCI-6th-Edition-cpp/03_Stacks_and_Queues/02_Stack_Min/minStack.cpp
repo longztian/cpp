@@ -15,12 +15,16 @@ int MinStack::pop() {
     myData.pop_back();
     return v;
   }
+
+  return -1;
 }
 
 int MinStack::peek() const {
   if (!myData.empty()) {
     return myData.back().data;
   }
+
+  return -1;
 }
 
 bool MinStack::empty() const noexcept {
@@ -31,6 +35,8 @@ int MinStack::min() const {
   if (!myData.empty()) {
     return myData.back().min;
   }
+
+  return -1;
 }
 
 MinStack minStack() {

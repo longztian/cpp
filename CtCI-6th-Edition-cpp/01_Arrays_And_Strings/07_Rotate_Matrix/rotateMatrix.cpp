@@ -30,8 +30,8 @@ void rotateMatrix(matrix_t& m) {
   for (row_t& r : m) {
     std::swap_ranges(r.begin(), r.begin() + n / 2, r.rbegin());
   }
-  for (auto i = 0; i < n; ++i) {
-    for (auto j = 0; j < n-i-1; ++j) {
+  for (size_t i = 0; i < n; ++i) {
+    for (size_t j = 0; j < n-i-1; ++j) {
       std::swap(m[i][j], m[n-j-1][n-i-1]);
     }
   }

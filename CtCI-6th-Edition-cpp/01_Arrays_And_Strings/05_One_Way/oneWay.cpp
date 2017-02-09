@@ -23,7 +23,7 @@ bool oneWay(const std::string& s1, const std::string& s2) {
     // check equal or replace
     int nDiff = 0;
 
-    for (auto i = 0; i < s1.length(); ++i) {
+    for (size_t i = 0; i < s1.length(); ++i) {
       if (s1[i] != s2[i]) nDiff += 1;
       if (nDiff > 1) return false;
     }

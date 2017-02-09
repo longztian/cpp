@@ -16,6 +16,8 @@ int StacksQueue::pop() {
     myFront.pop();
     return v;
   }
+
+  return -1;
 }
 
 int StacksQueue::peek() const {
@@ -28,6 +30,8 @@ int StacksQueue::peek() const {
   if (!myFront.empty()) {
     return myFront.top();
   }
+
+  return -1;
 }
 
 bool StacksQueue::empty() const noexcept {

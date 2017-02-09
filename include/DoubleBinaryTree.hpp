@@ -5,12 +5,12 @@
 #include <string>
 
 class DoubleBinaryTreeNode;
-using p_node_t = std::shared_ptr<DoubleBinaryTreeNode>;
+using p_node_t = std::unique_ptr<DoubleBinaryTreeNode>;
 
 class DoubleBinaryTreeNode {
  public:
   int data;
-  p_node_t parent;
+  DoubleBinaryTreeNode* parent;
   p_node_t left;
   p_node_t right;
 

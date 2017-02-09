@@ -20,10 +20,12 @@ int SetOfStacks::pop() {
     }
     return v;
   }
+
+  return -1;
 }
 
 int SetOfStacks::popAt(int index) {
-  if (index >= 0 && index < myStacks.size()) {
+  if (index >= 0 && static_cast<size_t>(index) < myStacks.size()) {
     auto v = myStacks[index].back();
     if (myStacks[index].size() == 1) {
       myStacks.erase(myStacks.cbegin() + index);
@@ -32,12 +34,16 @@ int SetOfStacks::popAt(int index) {
     }
     return v;
   }
+
+  return -1;
 }
 
 int SetOfStacks::peek() const {
   if (!myStacks.empty()) {
     return myStacks.back().back();
   }
+
+  return -1;
 }
 
 bool SetOfStacks::empty() const noexcept {
