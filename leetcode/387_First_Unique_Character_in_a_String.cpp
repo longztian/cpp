@@ -23,8 +23,8 @@ public:
             }
         }
 
-        int minId = *std::min_element(indexes, indexes + NLETTERS);
+        const int minIndex = *std::min_element(indexes, indexes + NLETTERS);
 
-        return minId < n ? minId : -1;
+        return minIndex < n ? minIndex : -1;
     }
 };
