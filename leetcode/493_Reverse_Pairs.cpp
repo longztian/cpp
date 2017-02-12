@@ -4,8 +4,8 @@ public:
         std::vector<long> ordered;
         ordered.reserve(nums.size());
 
-        long val;
         int n = 0, i = nums.size();
+        long val = 0;
 
         while (i) {
             val = static_cast<long>(nums[--i]);
