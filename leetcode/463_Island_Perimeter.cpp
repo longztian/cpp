@@ -28,3 +28,37 @@ public:
         return n;
     }
 };
+
+
+
+const vector<pair<int, int>> dir = {
+    {-1, 0},
+    {1, 0},
+    {0, -1},
+    {0, 1}
+};
+
+class Solution {
+public:
+    int islandPerimeter(vector<vector<int>>& grid) {
+        const int NR = grid.size();
+        if (NR == 0) return 0;
+        const int NC = grid.front().size();
+        if (NC == 0) return 0;
+
+        int perimeter = 0, x, y;
+        for (int i = 0; i < NR; ++i) {
+            for (int j = 0; j < NC; ++j) {
+                if (grid[i][j] == 0) continue;
+
+                for (const auto& d : dir) {
+                    x = i + d.first;
+                    y = j + d.second;
+                    if (x < 0 || x == NR || y < 0 || y == NC || grid[x][y] == 0) ++perimeter;
+                }
+            }
+        }
+
+        return perimeter;
+    }
+};

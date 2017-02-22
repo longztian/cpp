@@ -35,3 +35,25 @@ private:
         }
     };
 };
+
+
+class Solution {
+public:
+    vector<string> summaryRanges(vector<int>& nums) {
+        vector<string> ret;
+        if (nums.empty()) return ret;
+
+        const auto PE = nums.data() + nums.size();
+        auto pb = nums.data(), pe = pb + 1;
+        while (pb < PE) {
+            while (pe < PE && *(pe - 1) + 1 == *pe) ++pe;
+
+            if (pe - pb == 1) ret.push_back(std::to_string(*pb));
+            else ret.push_back(std::to_string(*pb) + "->" + std::to_string(*(pe -1)));
+
+            pb = pe++;
+        }
+
+        return ret;
+    }
+};
