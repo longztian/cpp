@@ -21,3 +21,21 @@ public:
         }
     }
 };
+
+
+class Solution {
+public:
+    void moveZeroes(vector<int>& nums) {
+        const auto PB = nums.data(), PE = PB + nums.size();
+
+        auto pZero = find(PB, PE, 0);
+        auto pValue = find_if(pZero + 1, PE, [](int v) { return v != 0; });
+
+        while (pValue < PE) {
+            *pZero++ = *pValue++;
+            pValue = find_if(pValue, PE, [](int v) { return v != 0; });
+        }
+
+        if (pZero < PE) fill(pZero, PE, 0);
+    }
+};

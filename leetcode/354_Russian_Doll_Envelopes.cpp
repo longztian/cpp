@@ -1,35 +1,46 @@
+// O(N^2)
 class Solution {
 public:
     int maxEnvelopes(vector<pair<int, int>>& envelopes) {
-        sort(envelopes.begin(), envelopes.end(), [](pair<int, int>& lhs, pair<int, int>& rhs) {
-            return lhs.first == rhs.first ? lhs.second < rhs.second : lhs.first < rhs.first;
+        const int N = envelopes.size();
+        if (N < 2) return N;
+
+        sort(envelopes.begin(), envelopes.end());
+
+        vector<int> counts(N, 1);
+
+        for (int i = 1; i < N; ++i) {
+            for (int j = 0; j < i; ++j) {
+                if (envelopes[i].first > envelopes[j].first && envelopes[i].second > envelopes[j].second) {
+                    counts[i] = max(counts[i], counts[j] + 1);
+                }
+            }
+        }
+
+        return *max_element(counts.begin(), counts.end());
+    }
+};
+
+
+// O(Nlog(N))
+class Solution {
+public:
+    int maxEnvelopes(vector<pair<int, int>>& envelopes) {
+        const int N = envelopes.size();
+        if (N < 2) return N;
+
+        sort(envelopes.begin(), envelopes.end(), [](const pair<int, int>& lfs, const pair<int, int>& rhs) {
+            return lfs.first != rhs.first ? lfs.first < rhs.first : lfs.second > rhs.second;
         });
 
-        int maxN = INT_MIN;
-        vector<int> doll;
-        myDP(envelopes, 0, doll, maxN);
-
-        return maxN;
-    }
-
-private:
-    void myDP(const vector<pair<int, int>>& envelopes, int i, vector<int>& doll, int& maxN) {
-        if (i == envelopes.size()) {
-            maxN = max(maxN, (int) doll.size());
-            return;
+        vector<int> tails;
+        auto it = tails.end();
+        for (const auto& env : envelopes) {
+            it = lower_bound(tails.begin(), tails.end(), env.second);
+            if (it == tails.end()) tails.push_back(env.second);
+            else *it = env.second;
         }
 
-        bool isBig;
-        for (int j = i; j < envelopes.size(); ++j) {
-            isBig = doll.empty()
-                    || (envelopes[j].first > envelopes[doll.back()].first
-                        && envelopes[j].second > envelopes[doll.back()].second);
-
-            if (isBig) doll.push_back(j);
-
-            myDP(envelopes, j + 1, doll, maxN);
-
-            if (isBig) doll.pop_back();
-        }
+        return tails.size();
     }
 };
