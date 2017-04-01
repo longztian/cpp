@@ -6,61 +6,63 @@ public:
     }
 
     /** Inserts a word into the trie. */
-    void insert(const string& word) {
-        auto node = &myRoot;
+    void insert(string word) {
+        auto pNode = &myRoot;
+        for (auto ch : word) {
+            if (pNode->children == nullptr) {
+                pNode->children.reset(new TrieNode::children_t());
+            }
 
-        int i;
-        for (auto c : word) {
-            if (!node->children) node->children.reset(new TrieNode::children_t());
+            auto& pNext = (*pNode->children)[ch - 'a'];
+            if (pNext == nullptr) {
+                pNext.reset(new TrieNode());
+            }
 
-            i = c - 'a';
-            if (!(*node->children)[i]) (*node->children)[i].reset(new TrieNode());
-
-            node = (*node->children)[i].get();
+            pNode = pNext.get();
         }
 
-        node->isEnd = true;
+        pNode->isEnd = true;
     }
 
     /** Returns if the word is in the trie. */
-    bool search(const string& word) const {
-        auto node = mySearchPrefix(word);
-        return node && node->isEnd;
+    bool search(string word) {
+        auto pNode = mySearchPrefix(word);
+        return pNode && pNode->isEnd;
     }
 
     /** Returns if there is any word in the trie that starts with the given prefix. */
-    bool startsWith(const string& prefix) const {
+    bool startsWith(string prefix) {
         return mySearchPrefix(prefix) != nullptr;
     }
 
 private:
     // types
     struct TrieNode {
-        // types
-        using children_t = std::array<std::unique_ptr<TrieNode>, 26>;
+        using p_node_t = unique_ptr<TrieNode>;
+        using children_t = array<p_node_t, 26>;
 
-        // properties
-        std::unique_ptr<children_t> children;
+        unique_ptr<children_t> children;
         bool isEnd;
 
-        // methods
-        TrieNode() : children(nullptr), isEnd(false) {};
+        TrieNode() : children(nullptr), isEnd(false) {}
     };
 
     // properties
     TrieNode myRoot;
 
     // methods
-    const TrieNode* mySearchPrefix(const std::string& prefix) const {
-        auto node = &myRoot;
+    const TrieNode* mySearchPrefix(const string& str) const {
+        const auto* pNode = &myRoot;
 
-        for (auto c : prefix) {
-            if (!node->children) return nullptr;
-            if (!(*node->children)[c - 'a']) return nullptr;
-            node = (*node->children)[c - 'a'].get();
+        for (auto ch : str) {
+            if (pNode->children == nullptr) return nullptr;
+            auto& pNext = (*pNode->children)[ch - 'a'];
+            if (pNext == nullptr) return  nullptr;
+
+            pNode = pNext.get();
         }
 
-        return node;
+        return pNode;
     }
 };
 
