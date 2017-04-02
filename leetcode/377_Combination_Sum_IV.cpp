@@ -1,12 +1,18 @@
+/**
+ * solution space is a tree with N children
+ * O(N^(target / min(nums)))
+ */
 class Solution {
 public:
     int combinationSum4(vector<int>& nums, int target) {
         sort(nums.begin(), nums.end());
-        return myHelper(nums, target);
+        unordered_map<int, int> myCache;
+
+        return myHelper(nums, target, myCache);
     }
 
 private:
-    int myHelper(const vector<int>& nums, int target) {
+    int myHelper(const vector<int>& nums, int target, unordered_map<int, int>& myCache) {
         if (target <= 0) return 0;
 
         // get from cache
@@ -17,7 +23,7 @@ private:
         auto i = nums.begin(), e = lower_bound(nums.begin(), nums.end(), target);
         int n = (e != nums.end() && *e == target ? 1 : 0);
         while (i != e) {
-            n += myHelper(nums, target - *i);
+            n += myHelper(nums, target - *i, myCache);
             ++i;
         }
 
@@ -25,11 +31,37 @@ private:
         myCache[target] = n;
         return n;
     }
-
-    unordered_map<int, int> myCache;
 };
 
+class Solution {
+public:
+    int combinationSum4(vector<int>& nums, int target) {
+        sort(nums.begin(), nums.end());
+        vector<int> myCache(target + 1, -1);
+
+        return myCount(nums, target, myCache);
+    }
+
+private:
+    int myCount(const vector<int>& nums, int target, vector<int>& myCache) {
+        if (myCache[target] != -1) return myCache[target];
+
+        int count = 0;
+        auto i = nums.begin(), e = nums.end();
+        for (; i != e && *i < target; ++i) {
+            count += myCount(nums, target - *i, myCache);
+        }
+        if (i != e && *i == target) ++count;
+
+        myCache[target] = count;
+        return count;
+    }
+};
+
+
+
 // Solution 2:
+// O(N * target)
 // there is a risk of int overflow
 // need to change to long, or cast to size_t
 class Solution {
